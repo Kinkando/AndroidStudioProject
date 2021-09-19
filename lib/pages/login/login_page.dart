@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food/pages/home/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -15,6 +16,20 @@ class _LoginPageState extends State<LoginPage> {
     //BuildContext อยากรู้ขนาดหน้าจอ ให้ข้อมูล Environment ของเครื่อง/แอป
     return Scaffold(
       body: Container(
+
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            // ไล่เฉดจากมุมบนซ้ายไปมุมล่างขวาของ Container
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            // ไล่เฉดจากสีแดงไปสีน้ำเงิน
+            colors: [
+              Colors.lightBlue.shade50,
+              Colors.blueAccent.shade100,
+            ],
+          ),
+        ),
+
         child: SafeArea(
           child: Column(
             children: [
@@ -26,14 +41,28 @@ class _LoginPageState extends State<LoginPage> {
                       Icon( //icon:png, background:jpg
                         Icons.lock_outlined,
                         size: 100.0,
+                        color: Colors.black.withOpacity(0.5),
                       ),
                       Text(
                         'LOGIN',
                         style: Theme.of(context).textTheme.headline1,
                       ),
                       Text(
-                        input,
+                        'Enter PIN to login',
                         style: Theme.of(context).textTheme.bodyText2,
+                      ),
+                      Container(
+                        height: 40.0,
+                        child: SizedBox.shrink(),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          for(var i=0;i<input.length;i++)
+                            Icon(Icons.circle, color: Colors.blue, size: 30.0),
+                          for(var i=input.length;i<6;i++)
+                            Icon(Icons.circle, color: Colors.blue.withOpacity(0.3), size: 30.0),
+                        ],
                       ),
                     ],
                   ),
@@ -94,13 +123,7 @@ class _LoginPageState extends State<LoginPage> {
               child: const Text('OK'),
               onPressed: () {
                 // ปิด dialog
-                if(title == 'WRONG!')
-                  Navigator.of(context).pop();
-                else
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
-                  );
+                Navigator.of(context).pop();
               },
             ),
           ],
@@ -110,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _handleClickButton(int num) {
-    print('hello $num');
+    //print('hello $num');
     setState(() {
       input = num >= 0
           ? '$input$num'  // '$number' : interpolate
@@ -119,9 +142,12 @@ class _LoginPageState extends State<LoginPage> {
           : input);
       if(input.length == 6) {
         if(input == '123456')
-          _showMaterialDialog('CORRECT!','Go to Home Page');
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+          );
         else {
-          _showMaterialDialog('WRONG!', 'Please enter your password again.');
+          _showMaterialDialog('ERROR', 'Invalid PIN. Please try again.');
           input = '';
         }
       }
@@ -134,7 +160,7 @@ class _LoginPageState extends State<LoginPage> {
       MaterialPageRoute(builder: (context) => SecondRoute()),     //go to homepage
     )
 
-    //Navigator.push()  //can go back to homepage with homepage code within Navigator.pop()
+    //Navigator.push(...)  //can go back to homepage with homepage code within Navigator.pop()
 
   }*/
 
@@ -161,7 +187,17 @@ class LoginButton extends StatelessWidget {
       child: Container(
         width: 80.0,
         height: 80.0,
-        decoration: number<0 ? null : BoxDecoration(
+        decoration: number==-2 ? null : BoxDecoration(
+          gradient: LinearGradient(
+            // ไล่เฉดจากมุมบนซ้ายไปมุมล่างขวาของ Container
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            // ไล่เฉดจากสีแดงไปสีน้ำเงิน
+            colors: [
+              Colors.white,
+              Colors.grey.shade300,
+            ],
+          ),
           shape: BoxShape.circle,
           border: Border.all(width: 2.0),
           //border width 0.0 : 1px of device (hair line)
