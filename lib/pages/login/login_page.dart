@@ -144,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
             context,
             MaterialPageRoute(builder: (context) => const HomePage()),
           );*/
-          Navigator.pushReplacementNamed(context, '/home');
+          Navigator.pushReplacementNamed(context, HomePage.routeName);
         } else {
           _showMaterialDialog('ERROR', 'Invalid PIN. Please try again.');
         }
