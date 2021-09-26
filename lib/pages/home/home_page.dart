@@ -16,7 +16,13 @@ class _HomePageState extends State<HomePage> {
         title: Text('FLUTTER FOOD'),
       ),
       body: Container(
-        child: SafeArea(
+        child: Center(
+          child : Text(
+              'THIS IS A HOME PAGE',
+              style: Theme.of(context).textTheme.headline1
+          ),
+        )
+        /*child: SafeArea(
           child: Column(
             children: [
               Expanded(
@@ -29,7 +35,7 @@ class _HomePageState extends State<HomePage> {
               )
             ],
           ),
-        ),
+        ),*/
       ),
     );
   }
