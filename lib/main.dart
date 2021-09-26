@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food/pages/login/login_page.dart';
 
+import 'pages/home/home_page.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -36,7 +38,12 @@ class MyApp extends StatelessWidget {
         ),
       ),
       //home: MyHomePage(title: 'Flutter Demo Home Page'),
-      home: LoginPage(),
+      //home: LoginPage(),
+      routes: {   // {  ... : ... } => map { key : value }
+        '/login': (context) => const LoginPage(), //ใช้ /login ในการ navigate แทนชื่อ class
+        '/home': (context) => const HomePage(),   //(ตั้งชื่อเป็นอะไรก็ได้ แต่ส่วนใหญ่ตั้งเป็น path)
+      },
+      initialRoute: '/login', //หน้าเริ่มต้น
     );
   }
 }
