@@ -33,9 +33,10 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
           headline6: TextStyle(
-            fontSize: 30.0,
+            fontSize: 24.0,
             fontWeight: FontWeight.bold,
           ),
+          bodyText1: TextStyle(fontSize: 20.0),
           bodyText2: TextStyle(fontSize: 14.0),
         ),
       ),
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
       routes: {   // {  ... : ... } => map { key : value }
         LoginPage.routeName: _test,  //ใช้แทน (context) => const LoginPage(), ได้ เมื่อต้องมีการ calculate ก่อนที่จะเปลี่ยน page
         HomePage.routeName: (context) => const HomePage(),    //ใช้ /login ในการ navigate แทนชื่อ class (ตั้งชื่อเป็นอะไรก็ได้ แต่ส่วนใหญ่ตั้งเป็น path)
+        FoodPage.routeName: (context) => const FoodPage(),
         FoodListPage.routeName: (context) => const FoodListPage(),
         OrderPage.routeName: (context) => const OrderPage(),
         ProfilePage.routeName: (context) => const ProfilePage(),

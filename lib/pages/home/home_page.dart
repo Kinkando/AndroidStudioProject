@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_food/pages/food/food_page.dart';
+import 'package:flutter_food/pages/profile/profile_page.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home';
@@ -11,7 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var _subPageIndex = 0;
-  var _selectedBottomNavIndex = 0;
+  FoodPage? _currentPage = FoodPage();
 
   @override
   Widget build(BuildContext context) {
@@ -26,72 +28,47 @@ class _HomePageState extends State<HomePage> {
           children: [
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.red,
+                color: Colors.blue,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(
-                    Icons.person,
-                    size: 50.0,
-                    color: Colors.white
+                  ClipRRect(
+                      borderRadius: BorderRadius.circular(40.0),
+                      child: Container(
+                        width: 80.0,
+                        height: 80.0,
+                        child: Image.asset('assets/images/profile.png'),
+                      )
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                    child: Text(
+                      'Tanawat Yuwansiri',
+                        style: Theme.of(context).textTheme.bodyText1,
+                    ),
                   ),
                   Text(
-                    'Firstname Lastname',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: Colors.white,
-                    )
+                    'TY_Sage@hotmail.com',
+                    style: Theme.of(context).textTheme.bodyText2,
                   ),
                 ],
               ),
             ),
             ListTile(
-              title: _buildDrawerItem(Icon(Icons.home), 'Home'),
+              title: _buildDrawerItem(Icon(Icons.fastfood), 'Food'),
               onTap: (){
                 _showSubPage(context, 0);
               },
             ),
             ListTile(
-              title: _buildDrawerItem(Icon(Icons.person), 'Page 1'),
+              title: _buildDrawerItem(Icon(Icons.person), 'Profile'),
               onTap: () => _showSubPage(context, 1),
-            ),
-            ListTile(
-              title: _buildDrawerItem(Icon(Icons.file_copy), 'Page 2'),
-              onTap: () => _showSubPage(context, 2),
-            ),
-            ListTile(
-              title: _buildDrawerItem(Icon(Icons.settings), 'Setting'),
-              onTap: (){},
             ),
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'HOME',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'PAGE 1',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'SETTINGS',
-          ),
-        ],
-        currentIndex: _selectedBottomNavIndex,
-        onTap: (index) {
-          setState(() {
-            _selectedBottomNavIndex = index;
-          });
-        },
-      ),
-      body: Container(
-        child: _buildSubPage(),
-      ),
+      body: _buildSubPage(),
     );
   }
 
@@ -102,36 +79,19 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  Widget _buildSubPage() {
+  dynamic _buildSubPage() {
     switch(_subPageIndex) {
       case 0 :
-        switch(_selectedBottomNavIndex) {
-          case 0 : return Center(
-            child : Text(
-                'FOOD MENU',
-                style: Theme.of(context).textTheme.headline1
-            ),
-          );
-          default : return Center(
-            child : Text(
-                'YOUR ORDER',
-                style: Theme.of(context).textTheme.headline1
-            ),
-          );
-        }
+        return _currentPage;
       default :
-        return Center(
-          child : Text(
-              'THIS IS A HOME PAGE',
-              style: Theme.of(context).textTheme.headline1
-          ),
-        );
+        return ProfilePage();
     }
   }
 
   void _showSubPage(BuildContext context, int page) {
     setState(() {
       _subPageIndex = page;
+      _currentPage = page==0 ? FoodPage() : null;
     });
     Navigator.of(context).pop();
     //Navigator.of(context).pushNamed(LoginPage.routeName);
@@ -142,7 +102,7 @@ class _HomePageState extends State<HomePage> {
       children: [
         icon,
         SizedBox(width: 8.0),
-        Text(title),
+        Text(title, style: Theme.of(context).textTheme.bodyText2),
       ],
     );
   }
