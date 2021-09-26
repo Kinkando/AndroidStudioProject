@@ -9,6 +9,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  static const pin = '123456';
   var input = '';
 
   @override
@@ -60,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           for(var i=0;i<input.length;i++)
                             Icon(Icons.circle, color: Colors.blue, size: 30.0),
-                          for(var i=input.length;i<6;i++)
+                          for(var i=input.length;i<pin.length;i++)
                             Icon(Icons.circle, color: Colors.blue.withOpacity(0.3), size: 30.0),
                         ],
                       ),
@@ -140,8 +141,8 @@ class _LoginPageState extends State<LoginPage> {
           : (input.length > 0
           ? input.substring(0, input.length-1)
           : input);
-      if(input.length == 6) {
-        if(input == '123456')
+      if(input.length == pin.length) {
+        if(input == pin)
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => HomePage()),
