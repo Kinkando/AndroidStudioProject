@@ -140,10 +140,11 @@ class _LoginPageState extends State<LoginPage> {
 
       if (input.length == pin.length) {
         if (input == pin) {
-          Navigator.pushReplacement(
+          /*Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => const HomePage()),
-          );
+          );*/
+          Navigator.pushReplacementNamed(context, '/home');
         } else {
           _showMaterialDialog('ERROR', 'Invalid PIN. Please try again.');
         }
