@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_food/pages/login/login_page.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home';
@@ -19,7 +18,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: Text('FLUTTER FOOD'),
+        title: _buildAppBarTitle(),
       ),
       drawer: Drawer(
         child: ListView(
@@ -96,32 +95,37 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Text _buildAppBarTitle() {
+    switch(_subPageIndex) {
+      case 0 : return Text('Food');
+      default : return Text('Profile');
+    }
+  }
+
   Widget _buildSubPage() {
     switch(_subPageIndex) {
       case 0 :
+        switch(_selectedBottomNavIndex) {
+          case 0 : return Center(
+            child : Text(
+                'FOOD MENU',
+                style: Theme.of(context).textTheme.headline1
+            ),
+          );
+          default : return Center(
+            child : Text(
+                'YOUR ORDER',
+                style: Theme.of(context).textTheme.headline1
+            ),
+          );
+        }
+      default :
         return Center(
           child : Text(
               'THIS IS A HOME PAGE',
               style: Theme.of(context).textTheme.headline1
           ),
         );
-        break;
-      case 1 :
-        return Center(
-            child: Text(
-                'PAGE 1',
-                style: Theme.of(context).textTheme.headline1
-            )
-        );
-      case 2 :
-        return Center(
-            child: Text(
-                'PAGE 2',
-                style: Theme.of(context).textTheme.headline1
-            )
-        );
-      default :
-        return SizedBox.shrink();
     }
   }
 

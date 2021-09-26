@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_food/pages/food/food_page.dart';
 import 'package:flutter_food/pages/login/login_page.dart';
+import 'package:flutter_food/pages/profile/profile_page.dart';
 
 import 'pages/home/home_page.dart';
 
@@ -42,6 +44,9 @@ class MyApp extends StatelessWidget {
       routes: {   // {  ... : ... } => map { key : value }
         LoginPage.routeName: _test,  //ใช้แทน (context) => const LoginPage(), ได้ เมื่อต้องมีการ calculate ก่อนที่จะเปลี่ยน page
         HomePage.routeName: (context) => const HomePage(),    //ใช้ /login ในการ navigate แทนชื่อ class (ตั้งชื่อเป็นอะไรก็ได้ แต่ส่วนใหญ่ตั้งเป็น path)
+        FoodListPage.routeName: (context) => const FoodListPage(),
+        OrderPage.routeName: (context) => const OrderPage(),
+        ProfilePage.routeName: (context) => const ProfilePage(),
       },
       initialRoute: LoginPage.routeName, //หน้าเริ่มต้น
     );
