@@ -56,13 +56,19 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             ListTile(
-              title: _buildDrawerItem(Icon(Icons.fastfood), 'Food'),
+              title: _buildDrawerItem(
+                  Icon(Icons.fastfood, color: _subPageIndex==0 ? Colors.blue : Colors.black),
+                  'Food', 0
+              ),
               onTap: (){
                 _showSubPage(context, 0);
               },
             ),
             ListTile(
-              title: _buildDrawerItem(Icon(Icons.person), 'Profile'),
+              title: _buildDrawerItem(
+                  Icon(Icons.person, color: _subPageIndex==1 ? Colors.blue : Colors.black),
+                  'Profile', 1
+              ),
               onTap: () => _showSubPage(context, 1),
             ),
           ],
@@ -97,12 +103,16 @@ class _HomePageState extends State<HomePage> {
     //Navigator.of(context).pushNamed(LoginPage.routeName);
   }
 
-  Row _buildDrawerItem(Widget icon, String title) {
+  Row _buildDrawerItem(Widget icon, String title, int onFocus) {
     return Row(
       children: [
         icon,
         SizedBox(width: 8.0),
-        Text(title, style: Theme.of(context).textTheme.bodyText2),
+        Text(
+          title,
+          style: _subPageIndex==onFocus
+              ? Theme.of(context).textTheme.headline5
+              : Theme.of(context).textTheme.bodyText2),
       ],
     );
   }
