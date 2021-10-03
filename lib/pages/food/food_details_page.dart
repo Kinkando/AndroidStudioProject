@@ -23,8 +23,8 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(
-              'assets/images/${item.image}',
+            FittedBox(
+              child: Image.asset('assets/images/${item.image}'),
               fit: BoxFit.fill,
             ),
             SizedBox(height: 20.0),
