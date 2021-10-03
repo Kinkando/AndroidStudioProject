@@ -13,7 +13,13 @@ class _FoodListPageState extends State<FoodListPage> {
   Widget build(BuildContext context) {
     return Container(
       child: ListView.builder(
-        itemBuilder: itemBuilder,
+        itemCount: items.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Text(
+            '${items[index]}',
+            style: TextStyle(fontSize: 20.0),
+          );
+        },
       ),
     );
   }
