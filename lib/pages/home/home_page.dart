@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
             ),
             ListTile(
               title: _buildDrawerItem(
-                  Icon(Icons.fastfood, color: _subPageIndex==0 ? Colors.blue : Colors.black),
+                  Icons.fastfood,
                   'Food', 0
               ),
               onTap: (){
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
             ),
             ListTile(
               title: _buildDrawerItem(
-                  Icon(Icons.person, color: _subPageIndex==1 ? Colors.blue : Colors.black),
+                  Icons.person,
                   'Profile', 1
               ),
               onTap: () => _showSubPage(context, 1),
@@ -103,10 +103,10 @@ class _HomePageState extends State<HomePage> {
     //Navigator.of(context).pushNamed(LoginPage.routeName);
   }
 
-  Row _buildDrawerItem(Widget icon, String title, int onFocus) {
+  Row _buildDrawerItem(IconData icon, String title, int onFocus) {
     return Row(
       children: [
-        icon,
+        Icon(icon, color: _subPageIndex==onFocus ? Colors.blue : null),
         SizedBox(width: 8.0),
         Text(
           title,
