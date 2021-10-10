@@ -21,6 +21,16 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.blue,
         title: _buildAppBarTitle(),
+        actions: [
+          IconButton(
+            onPressed: (){},
+            icon: Icon(Icons.search),
+          ),
+          IconButton(
+            onPressed: (){},
+            icon: Icon(Icons.refresh),
+          ),
+        ],
       ),
       drawer: Drawer(
         child: ListView(
