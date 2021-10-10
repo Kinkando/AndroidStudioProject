@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_food/pages/home/home_page.dart';
+import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
   static const routeName = '/login';
@@ -129,6 +132,36 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  Future<void> _fetchPIN() async {
+    var url = Uri.parse("https://cpsu-test-api.herokuapp.com/login");
+    var response = await http.post(url, body: {   // post, send data to API
+      'pin': input
+    });
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> jsonBody = json.decode(response.body);
+      String status = jsonBody['status'];
+      String? message = jsonBody['message'];
+      bool checkPIN = jsonBody['data'];
+      print(status);
+      print(message);
+      print(checkPIN);
+      setState(() {
+        if (checkPIN) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const HomePage()),
+          );
+          Navigator.pushReplacementNamed(context, HomePage.routeName);
+        } else {
+          _showMaterialDialog('ERROR', 'Invalid PIN. Please try again.');
+        }
+
+        input = '';
+      });
+    }
+  }
+
   void _handleClickButton(int num) {
     //print('You pressed $num');
 
@@ -140,17 +173,7 @@ class _LoginPageState extends State<LoginPage> {
       }
 
       if (input.length == pin.length) {
-        if (input == pin) {
-          /*Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const HomePage()),
-          );*/
-          Navigator.pushReplacementNamed(context, HomePage.routeName);
-        } else {
-          _showMaterialDialog('ERROR', 'Invalid PIN. Please try again.');
-        }
-
-        input = '';
+        _fetchPIN();
       }
     });
   }
