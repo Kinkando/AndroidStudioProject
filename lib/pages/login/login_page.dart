@@ -148,10 +148,10 @@ class _LoginPageState extends State<LoginPage> {
       print(checkPIN);
       setState(() {
         if (checkPIN) {
-          Navigator.pushReplacement(
+          /*Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => const HomePage()),
-          );
+          );*/
           Navigator.pushReplacementNamed(context, HomePage.routeName);
         } else {
           _showMaterialDialog('ERROR', 'Invalid PIN. Please try again.');
