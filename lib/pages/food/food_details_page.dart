@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_food/pages/food/food_item.dart';
+import 'package:flutter_food/models/food_item.dart';
 
 class FoodDetailsPage extends StatefulWidget {
   static const routeName = '/food_details';
@@ -19,38 +19,74 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
         title: Text(item.name),
         backgroundColor: Colors.blue,
       ),
-      body: Container(
+      body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            FittedBox(
-              child: Image.asset('assets/images/${item.image}'),
-              fit: BoxFit.fill,
+          children: <Widget>[
+            AspectRatio(
+              aspectRatio: 3 / 2,
+              child: Image.asset(
+                'assets/images/${item.image}',
+                fit: BoxFit.cover,
+              ),
             ),
-            SizedBox(height: 20.0),
-            Row(
-              children: [
-                SizedBox(
-                  width: 20.0,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'ชื่อเมนู: ${item.name}',
-                      style: Theme.of(context).textTheme.bodyText1,
-                    ),
-                    Text(
-                      'ราคา: ${item.price} บาท',
-                      style: Theme.of(context).textTheme.bodyText1,
-                    ),
-                  ],
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    'ชื่อเมนู: ${item.name}',
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                  Text(
+                    'ราคา: ${item.price.toString()} บาท',
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                ],
+              ),
             ),
           ],
         ),
       ),
+
+
+      /*body: Container(
+        child: ListView.builder(
+          itemCount: 1,
+          itemBuilder: (BuildContext context, int index) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                FittedBox(
+                  child: Image.asset('assets/images/${item.image}'),
+                  fit: BoxFit.fill,
+                ),
+                SizedBox(height: 20.0),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 20.0,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'ชื่อเมนู: ${item.name}',
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                        Text(
+                          'ราคา: ${item.price} บาท',
+                          style: Theme.of(context).textTheme.bodyText1,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            );
+          },
+        ),
+      ),*/
     );
   }
 }

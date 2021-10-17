@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_food/pages/food/food_details_page.dart';
 
-import 'food_item.dart';
+import '../../models/food_item.dart';
 
 class FoodListPage extends StatefulWidget {
   static const routeName = '/food_list';

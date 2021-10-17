@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_food/pages/food/food_list_page.dart';
 
-import 'food_item.dart';
+import '../../models/food_item.dart';
 import 'food_order_page.dart';
 
 import 'package:http/http.dart' as http;
